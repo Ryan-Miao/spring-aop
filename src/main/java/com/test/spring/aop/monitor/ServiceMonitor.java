@@ -16,12 +16,11 @@ public class ServiceMonitor {
 
     private static Logger logger = LoggerFactory.getLogger(ServiceMonitor.class);
 
-    StopWatch stopWatch = new StopWatch("performance");
 
     /**
      * define point
      */
-    @Pointcut("execution(* com.test.spring.aop..*Service.*(..))")
+    @Pointcut("execution(* com.test.spring.aop..HelloService.*(..))")
     public void performance(){}
 
 //    @Before("performance()")
@@ -47,6 +46,7 @@ public class ServiceMonitor {
     public Object watchPerformance(ProceedingJoinPoint point){
         System.out.println("The service start:");
 
+        StopWatch stopWatch = new StopWatch("performance");
         stopWatch.start(point.getSignature().toString());
         try {
             return point.proceed();
