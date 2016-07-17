@@ -39,7 +39,7 @@ public class UserMonitor {
     @Around("controllerPerformance() || servicePerformance() || repositoryPerformance() || connectorPerformance()")
     public Object watchPerformance(ProceedingJoinPoint joinPoint) throws Throwable {
         Signature signature = joinPoint.getSignature();
-        logger.info("=================start {}=====================",signature.getName());
+        logger.info("=================start {}=====================",signature.toShortString());
 
         StopWatch stopWatch = new StopWatch("controller");
         try {
@@ -57,7 +57,7 @@ public class UserMonitor {
         try {
             if (stopWatch.isRunning()) {
                 stopWatch.stop();
-                logger.info(stopWatch.prettyPrint()+"\n================= end {}=====================",signature.getName());
+                logger.info(stopWatch.prettyPrint()+"\n================= end {}=====================",signature.toShortString());
             }
         } catch (IllegalStateException e) {
             logger.error("watch end error:", e);

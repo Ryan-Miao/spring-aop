@@ -22,7 +22,7 @@ public class UserController {
     @ResponseBody
     @RequestMapping("/all")
     public List<User> users(){
-        try {Thread.sleep(1000);} catch (InterruptedException e) {e.printStackTrace();}
+        try {Thread.sleep(10000);} catch (InterruptedException e) {e.printStackTrace();}
         List<User> all = userService.getAll();
         return all;
     }
