@@ -68,17 +68,17 @@ public class PersonMonitor {
                 LOGGER.error("Get a exception: {}", message);
 
                 //get the constructor we want to new
-                Constructor constructor = null;
                 try {
-                    constructor = returnType.getConstructor(String.class, String.class);
+                    Constructor constructor = returnType.getConstructor(Object.class);
+                    if (constructor!=null){
+                        returnVal = constructor.newInstance("Created by Aop: "+message);
+                    }
                 } catch (NoSuchMethodException e) {
                     returnVal = new Person("The constructor not exist.");
                 } catch (SecurityException e) {
                     returnVal = new Person("Security forbidden.");
                 }
-                if (constructor!=null){
-                    returnVal = constructor.newInstance("Created by Aop: "+message);
-                }
+
 
             }else {
                 throw exception;
